@@ -1,3 +1,14 @@
+import { JSDOM } from "jsdom";
+
+function getURLsfromHTML(htmlBody, baseURL) {
+    const urls = [];
+    const dom = new JSDOM(htmlBody);
+    const linkElements = dom.window.document.querySelectorAll("a");
+    for (const linkElement of linkElements) {
+        console.log(linkElement.href);
+    }
+}
+
 function normalizeURL(urlString) {
     const urlObj = new URL(urlString);
     const hostPath = `${urlObj.hostname}${urlObj.pathname}`
@@ -8,6 +19,4 @@ function normalizeURL(urlString) {
     return hostPath;
 }
 
-module.exports = {
-    normalizeURL
-}
+export { normalizeURL, getURLsfromHTML };
